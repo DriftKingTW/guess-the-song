@@ -1,6 +1,7 @@
 <template>
   <div class="kkbox">
     <h1>Guess the Song!</h1>
+    <h3>Score: {{ score }}</h3>
     <h3>{{ gameStatus }}</h3>
     <a
       v-if="!userToken"
