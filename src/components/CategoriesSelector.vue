@@ -1,7 +1,11 @@
 <template>
-  <sapn v-for="(cat, index) in categories" :key="index">
-    <button @click="$emit('handleSelectCategory', cat.id)">{{cat.title}}</button>
-  </sapn>
+  <div>
+    <sapn v-for="(cat, index) in categories" :key="index">
+      <button @click="$emit('handleSelectCategory', cat.id)">
+        {{ cat.title }}
+      </button>
+    </sapn>
+  </div>
 </template>
 
 <script>
