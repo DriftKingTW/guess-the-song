@@ -6,7 +6,7 @@
       href="https://account.kkbox.com/oauth2/authorize?redirect_uri=https://kkbox-oauth-helper.web.app/1091f0/getToken&client_id=85e66ad411cf7cee23e2873738475e53&response_type=code&state=test"
       >Login with KKBOX</a
     >
-    <button v-if="userToken" @click="handleClick">Guess it!</button>
+    <button v-if="userToken" @click="newSongQuiz">Guess it!</button>
     <answer-list
       v-if="randomTrack.length"
       :tracks="randomTrack"
@@ -81,7 +81,7 @@ export default {
     }
   },
   methods: {
-    handleClick() {
+    newSongQuiz() {
       let url = encodeURI(
         `https://api.kkbox.com/v1.1/me/recommended-seed-tracks/${this.seedTrackID}?q=territory=${TERRITORY}` //&limit=10
       );
