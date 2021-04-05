@@ -1,6 +1,10 @@
 <template>
   <div class="kkbox">
     <h1>Guess the Song!</h1>
+    <categories-selector
+      :categories="categories"
+      @handleSelectCategory="handleSelectCategory"
+    ></categories-selector>
     <h3>Score: {{ score }} / {{ totalSocre }}</h3>
     <h3>{{ gameStatus }}</h3>
     <a
@@ -25,6 +29,7 @@
 import axios from "axios";
 import AnswerList from "@/components/AnswerList";
 import TrackPlayer from "@/components/TrackPlayer.vue";
+import CategoriesSelector from "@/components/CategoriesSelector";
 
 const TERRITORY = "TW";
 const QUIZ_COUNT = 10;
@@ -47,6 +52,7 @@ export default {
   components: {
     AnswerList,
     TrackPlayer,
+    CategoriesSelector,
   },
   name: "Kkbox",
   data() {
@@ -132,6 +138,9 @@ export default {
         this.score = 0;
         this.totalQuizCount = QUIZ_COUNT;
       }
+    },
+    handleSelectCategory(categoryID) {
+      console.log(categoryID);
     },
     handleUserAnswer(userAnswerID) {
       if (userAnswerID === this.ansTrack.id) {

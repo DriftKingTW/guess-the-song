@@ -1,0 +1,17 @@
+<template>
+  <sapn v-for="(cat, index) in categories" :key="index">
+    <button @click="$emit('handleSelectCategory', cat.id)">{{cat.title}}</button>
+  </sapn>
+</template>
+
+<script>
+export default {
+  name: "categories-selector",
+  props: {
+    categories: {
+      type: Array,
+      required: true,
+    },
+  },
+};
+</script>
