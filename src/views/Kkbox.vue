@@ -7,7 +7,11 @@
       >Login with KKBOX</a
     >
     <button v-if="userToken" @click="handleClick">Guess it!</button>
-    <answer-list v-if="randomTrack.length" :tracks="randomTrack" @handleUserAnswer="handleUserAnswer"></answer-list>
+    <answer-list
+      v-if="randomTrack.length"
+      :tracks="randomTrack"
+      @handleUserAnswer="handleUserAnswer"
+    ></answer-list>
     <track-player v-if="ansTrack.id" :trackID="ansTrack.id"></track-player>
   </div>
 </template>
@@ -95,14 +99,13 @@ export default {
         .catch((err) => console.log(err));
     },
     handleUserAnswer(userAnswerID) {
-      if(userAnswerID === this.ansTrack.id){
+      if (userAnswerID === this.ansTrack.id) {
         console.log("Perfect!");
-        this.score+=10
-      }
-      else console.log("False!")
+        this.score += 10;
+      } else console.log("False!");
 
-      console.log("Your score is: " + this.score)
-    }
+      console.log("Your score is: " + this.score);
+    },
   },
 };
 </script>
