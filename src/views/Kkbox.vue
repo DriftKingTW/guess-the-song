@@ -148,6 +148,7 @@ export default {
     handleSelectCategory(categoryID, categoryTitle) {
       this.score = 0;
       this.totalQuizCount = QUIZ_COUNT;
+      this.acceptAnswerInput = false;
       let url = encodeURI(
         `https://api.kkbox.com/v1.1/radio-categories/${categoryID}/tracks?q=territory=${TERRITORY}` //&limit=10
       );
