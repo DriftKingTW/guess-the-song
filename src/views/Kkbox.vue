@@ -1,14 +1,16 @@
 <template>
   <div class="kkbox">
     <h1>Guess the Song!</h1>
-    <h3>Score: {{ score }}</h3>
+    <h3>Score: {{ score }} / {{ totalSocre }}</h3>
     <h3>{{ gameStatus }}</h3>
     <a
       v-if="!userToken"
       href="https://account.kkbox.com/oauth2/authorize?redirect_uri=https://kkbox-oauth-helper.web.app/1091f0/getToken&client_id=85e66ad411cf7cee23e2873738475e53&response_type=code&state=test"
       >Login with KKBOX</a
     >
-    <button v-if="userToken" @click="newSongQuiz">Guess it!</button>
+    <button v-if="userToken" @click="newSongQuiz">
+      {{ controlButtonText }}
+    </button>
     <answer-list
       v-if="randomTrack.length"
       :tracks="randomTrack"
@@ -26,6 +28,7 @@ import TrackPlayer from "@/components/TrackPlayer.vue";
 
 const TERRITORY = "TW";
 const QUIZ_COUNT = 10;
+const SCORE_STEP = 10;
 
 function getRandomTrack(items, n = 1) {
   let res = [];
@@ -53,6 +56,7 @@ export default {
       ansTrack: [],
       seedTrackID: "8oRsSBpAlULSC9H9V8",
       gameStatus: "",
+      controlButtonText: "Initizaling...",
       totalQuizCount: QUIZ_COUNT,
       score: 0,
       acceptAnswerInput: true,
@@ -84,6 +88,7 @@ export default {
       if (kkboxOAuth !== null && kkboxOAuth.access_token !== undefined) {
         this.userToken = kkboxOAuth.access_token;
         this.authStr = "Bearer " + this.userToken;
+        this.controlButtonText = "Start";
       }
     }
   },
@@ -107,19 +112,28 @@ export default {
             this.acceptAnswerInput = true;
             this.totalQuizCount -= 1;
             this.gameStatus = "Guess it!";
+            this.controlButtonText = "Next quiz";
           })
           .catch((err) => console.log(err));
       } else {
+        this.controlButtonText = "Play again!";
         this.gameStatus = "Game ended! Your total score is: " + this.score;
+        this.score = 0;
+        this.totalQuizCount = QUIZ_COUNT;
       }
     },
     handleUserAnswer(userAnswerID) {
       if (userAnswerID === this.ansTrack.id) {
         this.gameStatus = "Correct!";
-        this.score += 10;
+        this.score += SCORE_STEP;
       } else this.gameStatus = "False!";
       this.acceptAnswerInput = false;
       console.log("Your score is: " + this.score);
+    },
+  },
+  computed: {
+    totalSocre() {
+      return QUIZ_COUNT * SCORE_STEP;
     },
   },
 };
