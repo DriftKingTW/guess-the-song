@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     newSongQuiz() {
-      this.gameStatus = "Loading..."
+      this.gameStatus = "Loading...";
       let url = encodeURI(
         `https://api.kkbox.com/v1.1/me/recommended-seed-tracks/${this.seedTrackID}?q=territory=${TERRITORY}` //&limit=10
       );
@@ -99,15 +99,15 @@ export default {
 
           this.ansTrack = getRandomTrack(questionList)[0];
 
-          this.gameStatus = "Guess it!"
+          this.gameStatus = "Guess it!";
         })
         .catch((err) => console.log(err));
     },
     handleUserAnswer(userAnswerID) {
       if (userAnswerID === this.ansTrack.id) {
-        this.gameStatus="Correct!";
+        this.gameStatus = "Correct!";
         this.score += 10;
-      } else this.gameStatus="False!";
+      } else this.gameStatus = "False!";
 
       console.log("Your score is: " + this.score);
     },
