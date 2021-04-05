@@ -6,6 +6,7 @@
       @handleSelectCategory="handleSelectCategory"
     ></categories-selector>
     <h3>Score: {{ score }} / {{ totalSocre }}</h3>
+    <h3>Category: {{ currentCategory }}</h3>
     <h3>{{ gameStatus }}</h3>
     <a
       v-if="!userToken"
@@ -61,6 +62,7 @@ export default {
       categories: [],
       randomTrack: [],
       ansTrack: [],
+      currentCategory: "",
       seedTrackID: "8oRsSBpAlULSC9H9V8",
       gameStatus: "",
       controlButtonText: "Initizaling...",
@@ -139,8 +141,29 @@ export default {
         this.totalQuizCount = QUIZ_COUNT;
       }
     },
-    handleSelectCategory(categoryID) {
-      console.log(categoryID);
+    handleSelectCategory(categoryID, categoryTitle) {
+      this.score = 0;
+      this.totalQuizCount = QUIZ_COUNT;
+      let url = encodeURI(
+        `https://api.kkbox.com/v1.1/radio-categories/${categoryID}/tracks?q=territory=${TERRITORY}` //&limit=10
+      );
+      axios
+        .get(url, { headers: { Authorization: this.authStr } })
+        .then((res) => {
+          console.log(categoryTitle);
+          this.currentCategory = categoryTitle;
+          let albumID = res.data.data[0].album.id;
+          url = encodeURI(
+            `https://api.kkbox.com/v1.1/albums/${albumID}/tracks?q=territory=${TERRITORY}&limit=1`
+          );
+          axios
+            .get(url, { headers: { Authorization: this.authStr } })
+            .then((res) => {
+              this.seedTrackID = res.data.data[0].id;
+            })
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
     },
     handleUserAnswer(userAnswerID) {
       if (userAnswerID === this.ansTrack.id) {
