@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "question-list",
+  name: "answer-list",
   props: {
     tracks: {
       type: Object,

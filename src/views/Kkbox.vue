@@ -7,17 +7,14 @@
       >Login with KKBOX</a
     >
     <button v-if="userToken" @click="handleClick">Guess it!</button>
-    <question-list
-      v-if="randomTrack.length"
-      :tracks="randomTrack"
-    ></question-list>
+    <answer-list v-if="randomTrack.length" :tracks="randomTrack"></answer-list>
     <track-player v-if="ansTrack.id" :trackID="ansTrack.id"></track-player>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import QuestionList from "@/components/QuestionList";
+import AnswerList from "@/components/AnswerList";
 import TrackPlayer from "@/components/TrackPlayer.vue";
 
 const TERRITORY = "TW";
@@ -37,7 +34,7 @@ function getRandomTrack(items, n = 1) {
 
 export default {
   components: {
-    QuestionList,
+    AnswerList,
     TrackPlayer,
   },
   name: "Kkbox",
