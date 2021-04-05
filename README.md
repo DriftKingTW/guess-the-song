@@ -1,4 +1,4 @@
-# kkbox-api-project
+# guess-the-song
 
 ## Project setup
 ```
