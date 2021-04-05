@@ -87,6 +87,7 @@ export default {
     } else {
       console.log("getToken fail");
     }
+    window.history.pushState({}, null, "/");
     // window.location.replace('./kkbox?state=' + state);
 
     if (typeof Storage == "undefined") {
