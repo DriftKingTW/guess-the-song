@@ -63,7 +63,7 @@ export default {
       randomTrack: [],
       ansTrack: [],
       currentCategory: "",
-      seedTrackID: "8oRsSBpAlULSC9H9V8",
+      seedTrackID: "",
       gameStatus: "",
       controlButtonText: "Initizaling...",
       totalQuizCount: QUIZ_COUNT,
@@ -113,6 +113,10 @@ export default {
   },
   methods: {
     newSongQuiz() {
+      if (this.seedTrackID === "") {
+        this.gameStatus = "Please select a category first";
+        return null;
+      }
       if (this.totalQuizCount > 0) {
         this.gameStatus = "Loading...";
         let url = encodeURI(
