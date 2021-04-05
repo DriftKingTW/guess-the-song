@@ -1,13 +1,15 @@
 <template>
   <ul>
     <li v-for="(track, index) in tracks" :key="index">
-      <!-- <img :src="track.album.images[0].url" alt="" /> -->
-      <p>{{ track.name }} | {{ track.album.artist.name }}</p>
-      <a :href="track.url" target="_blank" style="display: none"
-        >Link to Page</a
-      >
-      <!-- <p>ID: {{ track.id }}</p> -->
-      <!-- <track-player :trackID="track.id"></track-player> -->
+      <button @click.prevent="$emit('handleUserAnswer', track.id)">
+        <!-- <img :src="track.album.images[0].url" alt="" /> -->
+        <p>{{ track.name }} | {{ track.album.artist.name }}</p>
+        <!-- <a :href="track.url" target="_blank" style="display: none"
+          >Link to Page</a
+        > -->
+        <!-- <p>ID: {{ track.id }}</p> -->
+        <!-- <track-player :trackID="track.id"></track-player> -->
+      </button>
     </li>
   </ul>
 </template>
