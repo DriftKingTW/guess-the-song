@@ -52,6 +52,7 @@ export default {
   data() {
     return {
       //   datas: [],
+      categories: [],
       randomTrack: [],
       ansTrack: [],
       seedTrackID: "8oRsSBpAlULSC9H9V8",
@@ -89,6 +90,16 @@ export default {
         this.userToken = kkboxOAuth.access_token;
         this.authStr = "Bearer " + this.userToken;
         this.controlButtonText = "Start";
+
+        let url = encodeURI(
+          `https://api.kkbox.com/v1.1/new-release-categories?q=territory=${TERRITORY}`
+        );
+        axios
+          .get(url, { headers: { Authorization: this.authStr } })
+          .then((res) => {
+            this.categories = [...res.data.data];
+          })
+          .catch((err) => console.log(err));
       }
     }
   },
