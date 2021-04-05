@@ -25,6 +25,7 @@ import AnswerList from "@/components/AnswerList";
 import TrackPlayer from "@/components/TrackPlayer.vue";
 
 const TERRITORY = "TW";
+const QUIZ_COUNT = 10;
 
 function getRandomTrack(items, n = 1) {
   let res = [];
@@ -52,6 +53,7 @@ export default {
       ansTrack: [],
       seedTrackID: "8oRsSBpAlULSC9H9V8",
       gameStatus: "",
+      totalQuizCount: QUIZ_COUNT,
       score: 0,
       acceptAnswerInput: true,
       userToken: null,
@@ -87,24 +89,29 @@ export default {
   },
   methods: {
     newSongQuiz() {
-      this.gameStatus = "Loading...";
-      let url = encodeURI(
-        `https://api.kkbox.com/v1.1/me/recommended-seed-tracks/${this.seedTrackID}?q=territory=${TERRITORY}` //&limit=10
-      );
-      axios
-        .get(url, { headers: { Authorization: this.authStr } })
-        .then((res) => {
-          const arr = res.data.tracks.data;
+      if (this.totalQuizCount > 0) {
+        this.gameStatus = "Loading...";
+        let url = encodeURI(
+          `https://api.kkbox.com/v1.1/me/recommended-seed-tracks/${this.seedTrackID}?q=territory=${TERRITORY}` //&limit=10
+        );
+        axios
+          .get(url, { headers: { Authorization: this.authStr } })
+          .then((res) => {
+            const arr = res.data.tracks.data;
 
-          this.randomTrack = getRandomTrack(arr, 4);
+            this.randomTrack = getRandomTrack(arr, 4);
 
-          const questionList = [...this.randomTrack];
+            const questionList = [...this.randomTrack];
 
-          this.ansTrack = getRandomTrack(questionList)[0];
-          this.acceptAnswerInput = true;
-          this.gameStatus = "Guess it!";
-        })
-        .catch((err) => console.log(err));
+            this.ansTrack = getRandomTrack(questionList)[0];
+            this.acceptAnswerInput = true;
+            this.totalQuizCount -= 1;
+            this.gameStatus = "Guess it!";
+          })
+          .catch((err) => console.log(err));
+      } else {
+        this.gameStatus = "Game ended! Your total score is: " + this.score;
+      }
     },
     handleUserAnswer(userAnswerID) {
       if (userAnswerID === this.ansTrack.id) {
