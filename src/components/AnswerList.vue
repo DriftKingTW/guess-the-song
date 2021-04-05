@@ -1,7 +1,10 @@
 <template>
   <ul>
     <li v-for="(track, index) in tracks" :key="index">
-      <button @click.prevent="$emit('handleUserAnswer', track.id)">
+      <button
+        @click.prevent="$emit('handleUserAnswer', track.id)"
+        :disabled="!isDisable"
+      >
         <!-- <img :src="track.album.images[0].url" alt="" /> -->
         <p>{{ track.name }} | {{ track.album.artist.name }}</p>
         <!-- <a :href="track.url" target="_blank" style="display: none"
@@ -20,6 +23,10 @@ export default {
   props: {
     tracks: {
       type: Object,
+      required: true,
+    },
+    isDisable: {
+      type: Boolean,
       required: true,
     },
   },

@@ -12,6 +12,7 @@
     <answer-list
       v-if="randomTrack.length"
       :tracks="randomTrack"
+      :isDisable="acceptAnswerInput"
       @handleUserAnswer="handleUserAnswer"
     ></answer-list>
     <track-player v-if="ansTrack.id" :trackID="ansTrack.id"></track-player>
@@ -52,6 +53,7 @@ export default {
       seedTrackID: "8oRsSBpAlULSC9H9V8",
       gameStatus: "",
       score: 0,
+      acceptAnswerInput: true,
       userToken: null,
       authStr: null,
     };
@@ -99,7 +101,7 @@ export default {
           const questionList = [...this.randomTrack];
 
           this.ansTrack = getRandomTrack(questionList)[0];
-
+          this.acceptAnswerInput = true;
           this.gameStatus = "Guess it!";
         })
         .catch((err) => console.log(err));
@@ -109,7 +111,7 @@ export default {
         this.gameStatus = "Correct!";
         this.score += 10;
       } else this.gameStatus = "False!";
-
+      this.acceptAnswerInput = false;
       console.log("Your score is: " + this.score);
     },
   },
