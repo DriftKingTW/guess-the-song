@@ -1,6 +1,7 @@
 <template>
   <div class="kkbox">
     <h1>Guess the Song!</h1>
+    <h3>{{ gameStatus }}</h3>
     <a
       v-if="!userToken"
       href="https://account.kkbox.com/oauth2/authorize?redirect_uri=https://kkbox-oauth-helper.web.app/1091f0/getToken&client_id=85e66ad411cf7cee23e2873738475e53&response_type=code&state=test"
@@ -48,6 +49,7 @@ export default {
       randomTrack: [],
       ansTrack: [],
       seedTrackID: "8oRsSBpAlULSC9H9V8",
+      gameStatus: "",
       score: 0,
       userToken: null,
       authStr: null,
@@ -82,6 +84,7 @@ export default {
   },
   methods: {
     newSongQuiz() {
+      this.gameStatus = "Loading..."
       let url = encodeURI(
         `https://api.kkbox.com/v1.1/me/recommended-seed-tracks/${this.seedTrackID}?q=territory=${TERRITORY}` //&limit=10
       );
@@ -95,14 +98,16 @@ export default {
           const questionList = [...this.randomTrack];
 
           this.ansTrack = getRandomTrack(questionList)[0];
+
+          this.gameStatus = "Guess it!"
         })
         .catch((err) => console.log(err));
     },
     handleUserAnswer(userAnswerID) {
       if (userAnswerID === this.ansTrack.id) {
-        console.log("Perfect!");
+        this.gameStatus="Correct!";
         this.score += 10;
-      } else console.log("False!");
+      } else this.gameStatus="False!";
 
       console.log("Your score is: " + this.score);
     },
