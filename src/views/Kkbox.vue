@@ -13,9 +13,16 @@
       href="https://account.kkbox.com/oauth2/authorize?redirect_uri=https://kkbox-oauth-helper.web.app/1091f0/getToken&client_id=85e66ad411cf7cee23e2873738475e53&response_type=code&state=test"
       >Login with KKBOX</a
     >
-    <button v-if="userToken" @click="newSongQuiz">
-      {{ controlButtonText }}
-    </button>
+    <div class="game-button-container">
+      <a href="#"
+        class="white" v-if="userToken" @click="newSongQuiz">
+        <p>
+          <span class="bg"></span>
+          <span class="base"></span>
+          <span class="text">{{ controlButtonText }}</span>
+        </p>
+      </a>
+    </div>
     <answer-list
       v-if="randomTrack.length"
       :tracks="randomTrack"
@@ -100,7 +107,7 @@ export default {
         this.controlButtonText = "Start";
 
         let url = encodeURI(
-          `https://api.kkbox.com/v1.1/new-release-categories?q=territory=${TERRITORY}`
+          `https://api.kkbox.com/v1.1/new-release-categories?territory=${TERRITORY}&offset=1`
         );
         axios
           .get(url, { headers: { Authorization: this.authStr } })
@@ -186,3 +193,7 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+@import "@/assets/master.scss";
+</style>
