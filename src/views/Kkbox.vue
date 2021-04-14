@@ -1,6 +1,8 @@
 <template>
   <div class="kkbox">
-    <h1>Guess the Song!</h1>
+    <div class="text-effect">
+      <h1>Guess the Song!</h1>
+    </div>
     <categories-selector
       :categories="categories"
       @handleSelectCategory="handleSelectCategory"
