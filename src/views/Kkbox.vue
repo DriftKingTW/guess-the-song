@@ -5,7 +5,7 @@
       :categories="categories"
       @handleSelectCategory="handleSelectCategory"
     ></categories-selector>
-    <h3>Score: {{ score }} / {{ totalSocre }}</h3>
+    <h3>Score: {{ score }} / {{ totalSocre }} | Quiz left: {{ totalQuizCount }}</h3>
     <h3>Category: {{ currentCategory }}</h3>
     <h3>{{ gameStatus }}</h3>
     <a
