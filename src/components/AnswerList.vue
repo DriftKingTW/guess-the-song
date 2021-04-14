@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div class="game-button-container" v-for="(track, index) in tracks" :key="index">
+    <div
+      class="game-button-container"
+      v-for="(track, index) in tracks"
+      :key="index"
+    >
       <a
         href="#"
         class="transparent"

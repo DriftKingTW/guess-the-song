@@ -1,7 +1,8 @@
 <template>
   <div id="category-container">
     <section class="accordion">
-      <input type="checkbox" name="collapse" id="handle1" v-model="collapse" /> <!--  checked="checked"  -->
+      <input type="checkbox" name="collapse" id="handle1" v-model="collapse" />
+      <!--  checked="checked"  -->
       <h2 class="handle">
         <label for="handle1">Category</label>
       </h2>
@@ -11,7 +12,10 @@
             <a
               href="#"
               class="tag"
-              @click="collapseSection(); $emit('handleSelectCategory', cat.id, cat.title); "
+              @click="
+                collapseSection();
+                $emit('handleSelectCategory', cat.id, cat.title);
+              "
             >
               {{ cat.title }}
             </a>
@@ -33,13 +37,13 @@ export default {
   },
   data() {
     return {
-      collapse: "checked"
-    }
+      collapse: "checked",
+    };
   },
   methods: {
     collapseSection() {
-      this.collapse = ""
-    }
-  }
+      this.collapse = "";
+    },
+  },
 };
 </script>

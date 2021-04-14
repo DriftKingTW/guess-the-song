@@ -5,7 +5,9 @@
       :categories="categories"
       @handleSelectCategory="handleSelectCategory"
     ></categories-selector>
-    <h3>Score: {{ score }} / {{ totalSocre }} | Quiz left: {{ totalQuizCount }}</h3>
+    <h3>
+      Score: {{ score }} / {{ totalSocre }} | Quiz left: {{ totalQuizCount }}
+    </h3>
     <h3>Category: {{ currentCategory }}</h3>
     <h3>{{ gameStatus }}</h3>
     <a
@@ -14,8 +16,7 @@
       >Login with KKBOX</a
     >
     <div class="game-button-container">
-      <a href="#"
-        class="white" v-if="userToken" @click="newSongQuiz">
+      <a href="#" class="white" v-if="userToken" @click="newSongQuiz">
         <p>
           <span class="bg"></span>
           <span class="base"></span>
@@ -178,7 +179,7 @@ export default {
         .catch((err) => console.log(err));
     },
     handleUserAnswer(userAnswerID) {
-      if( !this.acceptAnswerInput ) return null;
+      if (!this.acceptAnswerInput) return null;
       if (userAnswerID === this.ansTrack.id) {
         this.gameStatus = "Correct!";
         this.score += SCORE_STEP;
