@@ -178,6 +178,7 @@ export default {
         .catch((err) => console.log(err));
     },
     handleUserAnswer(userAnswerID) {
+      if( !this.acceptAnswerInput ) return null;
       if (userAnswerID === this.ansTrack.id) {
         this.gameStatus = "Correct!";
         this.score += SCORE_STEP;
