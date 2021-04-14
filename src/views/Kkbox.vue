@@ -183,9 +183,18 @@ export default {
     handleUserAnswer(userAnswerID) {
       if (!this.acceptAnswerInput) return null;
       if (userAnswerID === this.ansTrack.id) {
-        this.gameStatus = "Correct! The answer is: " + this.ansTrack.name + " by " + this.ansTrack.album.artist.name;
+        this.gameStatus =
+          "Correct! The answer is: " +
+          this.ansTrack.name +
+          " by " +
+          this.ansTrack.album.artist.name;
         this.score += SCORE_STEP;
-      } else this.gameStatus = "False! The answer is: " + this.ansTrack.name + " by " + this.ansTrack.album.artist.name;
+      } else
+        this.gameStatus =
+          "False! The answer is: " +
+          this.ansTrack.name +
+          " by " +
+          this.ansTrack.album.artist.name;
       this.acceptAnswerInput = false;
       console.log("Your score is: " + this.score);
     },
