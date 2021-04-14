@@ -12,11 +12,20 @@
     </h3>
     <h3>Category: {{ currentCategory }}</h3>
     <h3>{{ gameStatus }}</h3>
-    <a
-      v-if="!userToken"
-      href="https://account.kkbox.com/oauth2/authorize?redirect_uri=https://kkbox-oauth-helper.web.app/1091f0/getToken&client_id=85e66ad411cf7cee23e2873738475e53&response_type=code&state=test"
-      >Login with KKBOX</a
-    >
+    <div class="game-button-container">
+      <a
+        class="white"
+        v-if="!userToken"
+        href="https://account.kkbox.com/oauth2/authorize?redirect_uri=https://kkbox-oauth-helper.web.app/1091f0/getToken&client_id=85e66ad411cf7cee23e2873738475e53&response_type=code&state=test"
+      >
+        <p>
+          <span class="bg"></span>
+          <span class="base"></span>
+          <span class="text">Login With KKBOX</span>
+        </p>
+      </a>
+    </div>
+
     <div class="game-button-container">
       <a href="#" class="white" v-if="userToken" @click="newSongQuiz">
         <p>
