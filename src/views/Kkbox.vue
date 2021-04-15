@@ -168,6 +168,7 @@ export default {
       this.score = 0;
       this.totalQuizCount = QUIZ_COUNT;
       this.acceptAnswerInput = false;
+      this.controlButtonText = "Loading..."
       let url = encodeURI(
         `https://api.kkbox.com/v1.1/radio-categories/${categoryID}/tracks?q=territory=${TERRITORY}` //&limit=10
       );
@@ -184,6 +185,7 @@ export default {
             .get(url, { headers: { Authorization: this.authStr } })
             .then((res) => {
               this.seedTrackID = res.data.data[0].id;
+              this.controlButtonText = "Start";
             })
             .catch((err) => console.log(err));
         })
