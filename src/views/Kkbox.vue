@@ -1,5 +1,6 @@
 <template>
   <div class="kkbox">
+    <fork-me></fork-me>
     <div class="text-effect">
       <h1>Guess the Song!</h1>
     </div>
@@ -50,6 +51,7 @@ import axios from "axios";
 import AnswerList from "@/components/AnswerList";
 import TrackPlayer from "@/components/TrackPlayer.vue";
 import CategoriesSelector from "@/components/CategoriesSelector";
+import ForkMe from "@/components/ForkMe.vue";
 
 const TERRITORY = "TW";
 const QUIZ_COUNT = 10;
@@ -73,6 +75,7 @@ export default {
     AnswerList,
     TrackPlayer,
     CategoriesSelector,
+    ForkMe,
   },
   name: "Kkbox",
   data() {
