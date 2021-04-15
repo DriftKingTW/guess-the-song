@@ -97,19 +97,16 @@ export default {
     let retObj = JSON.parse(selfUri.searchParams.get("ret"));
     // let state = selfUri.searchParams.get("state");
 
-
     if (retObj !== null) {
       if (typeof Storage == "undefined") {
         console.log("not support WebStorage");
       } else {
         localStorage.setItem("kkboxOAuth", JSON.stringify(retObj));
+        window.location.replace(selfUri.origin + "/guess-the-song");
       }
     } else {
       console.log("getToken fail");
     }
-    // window.location.replace('./kkbox?state=' + state);
-
-    window.history.pushState({}, null, "/guess-the-song");
 
     if (typeof Storage == "undefined") {
       console.log("not support WebStorage");
