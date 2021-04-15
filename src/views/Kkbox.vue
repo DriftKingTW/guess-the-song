@@ -107,6 +107,8 @@ export default {
       console.log("getToken fail");
     }
 
+    window.history.pushState({}, state, "/guess-the-song");
+
     if (typeof Storage == "undefined") {
       console.log("not support WebStorage");
     } else {
@@ -127,8 +129,6 @@ export default {
           })
           .catch((err) => console.log(err));
       }
-
-      window.history.pushState({}, state, "/guess-the-song");
     }
   },
   methods: {
