@@ -168,7 +168,7 @@ export default {
       this.score = 0;
       this.totalQuizCount = QUIZ_COUNT;
       this.acceptAnswerInput = false;
-      this.controlButtonText = "Loading..."
+      this.controlButtonText = "Loading...";
       let url = encodeURI(
         `https://api.kkbox.com/v1.1/radio-categories/${categoryID}/tracks?q=territory=${TERRITORY}` //&limit=10
       );
