@@ -95,7 +95,7 @@ export default {
   mounted() {
     let selfUri = new URL(window.location.href);
     let retObj = JSON.parse(selfUri.searchParams.get("ret"));
-    let state = selfUri.searchParams.get("state");
+    // let state = selfUri.searchParams.get("state");
 
     if (retObj !== null) {
       if (typeof Storage == "undefined") {
@@ -107,7 +107,7 @@ export default {
       console.log("getToken fail");
     }
 
-    window.history.pushState({}, state, "/guess-the-song");
+    window.history.pushState({}, null, "/guess-the-song");
 
     if (typeof Storage == "undefined") {
       console.log("not support WebStorage");
