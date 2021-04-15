@@ -16,7 +16,7 @@
       <a
         class="white"
         v-if="!userToken"
-        href="https://account.kkbox.com/oauth2/authorize?redirect_uri=https://kkbox-oauth-helper.web.app/1091f0/getToken&client_id=85e66ad411cf7cee23e2873738475e53&response_type=code&state=test"
+        href="https://account.kkbox.com/oauth2/authorize?redirect_uri=https://kkbox-oauth-helper.web.app/1091f0/getToken&client_id=85e66ad411cf7cee23e2873738475e53&response_type=code&state=success"
       >
         <p>
           <span class="bg"></span>
@@ -95,7 +95,7 @@ export default {
   mounted() {
     let selfUri = new URL(window.location.href);
     let retObj = JSON.parse(selfUri.searchParams.get("ret"));
-    // let state = selfUri.searchParams.get('state');
+    let state = selfUri.searchParams.get("state");
 
     if (retObj !== null) {
       if (typeof Storage == "undefined") {
@@ -106,7 +106,6 @@ export default {
     } else {
       console.log("getToken fail");
     }
-    // window.location.replace('./kkbox?state=' + state);
 
     if (typeof Storage == "undefined") {
       console.log("not support WebStorage");
@@ -128,6 +127,8 @@ export default {
           })
           .catch((err) => console.log(err));
       }
+
+      window.history.pushState({}, state, "/guess-the-song");
     }
   },
   methods: {
