@@ -10,7 +10,7 @@
     <h3>
       Score: {{ score }} / {{ totalSocre }} | Quiz left: {{ totalQuizCount }}
     </h3>
-    <h3>Category: {{ currentCategory }}</h3>
+    <h3 v-if="currentCategory">Category: {{ currentCategory }}</h3>
     <h3>{{ gameStatus }}</h3>
     <div class="game-button-container">
       <a
@@ -116,7 +116,7 @@ export default {
       if (kkboxOAuth !== null && kkboxOAuth.access_token !== undefined) {
         this.userToken = kkboxOAuth.access_token;
         this.authStr = "Bearer " + this.userToken;
-        this.controlButtonText = "Start";
+        this.controlButtonText = "▲ Select a Category First ▲";
 
         let url = encodeURI(
           `https://api.kkbox.com/v1.1/new-release-categories?territory=${TERRITORY}&offset=1`
@@ -133,7 +133,7 @@ export default {
   methods: {
     newSongQuiz() {
       if (this.seedTrackID === "") {
-        this.gameStatus = "Please select a category first";
+        this.gameStatus = "Please select a category first 🥺🙏";
         return null;
       }
       if (this.totalQuizCount > 0) {
