@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: "fork-me"
+  name: "fork-me",
 };
 </script>
 
