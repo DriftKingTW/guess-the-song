@@ -1,6 +1,6 @@
 <template>
   <a
-    href="https://github.com/DriftKingTW/vue-todo-list"
+    href="https://github.com/DriftKingTW/guess-the-song"
     class="github-corner"
     aria-label="View source on GitHub"
     target="_blank"
