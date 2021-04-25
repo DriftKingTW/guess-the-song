@@ -188,6 +188,7 @@ export default {
             .get(url, { headers: { Authorization: this.authStr } })
             .then((res) => {
               this.seedTrackID = res.data.data[0].id;
+              this.gameStatus = "🎵 Ready? 🎵";
               this.controlButtonText = "Start";
             })
             .catch((err) => console.log(err));
