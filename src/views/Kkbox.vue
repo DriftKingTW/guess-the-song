@@ -192,7 +192,12 @@ export default {
             })
             .catch((err) => console.log(err));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log("Status Code: " + err.response.status);
+          this.gameStatus =
+            "Sorry! We currently don't have songs in this category! 😅";
+          this.controlButtonText = "Please select a category first 🥺🙏";
+        });
     },
     handleUserAnswer(userAnswerID) {
       if (!this.acceptAnswerInput) return null;
